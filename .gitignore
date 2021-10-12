@@ -1,5 +1,6 @@
 /node_modules
 /dist
-
+.key
+.key.pub
 # Keep environment variables out of version control
 .env
