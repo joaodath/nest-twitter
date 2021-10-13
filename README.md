@@ -1,73 +1,79 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Nest Twitter API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/joaodath/nest-twitter)
+[![Lines of Code](https://img.shields.io/tokei/lines/github/joaodath/nest-twitter)](https://img.shields.io/tokei/lines/github/joaodath/nest-twitter)
+[![Repo Size](https://img.shields.io/github/repo-size/joaodath/nest-twitter)](https://img.shields.io/github/repo-size/joaodath/nest-twitter)
+![CodeQL](https://github.com/joaodath/nest-twitter/actions/workflows/codeql-analysis.yml/badge.svg)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project mimics how I imagine Twitter backend behaves using NestJS and persisting data using MySQL. This is nowhere an attempt to recreate Twitter, but simply a studying project. 
 
 ## Installation
 
-```bash
-$ npm install
+Then, open the folder containing this code and run on terminal:
+First things first, you need to download and install all depedencies needed to 
+run this project. To do that, you need to run the following command:
+
+> You'll need NodeJS and NPM installed beforehand.
+
 ```
+npm install
+```
+After that, copy the `.env.example` file to create your environment variables.
+You can do that from terminal using the following command (or do that using
+the GUI of your code editor):
+
+```
+cp .env.example .env
+```
+
+Open `.env` and fill in the data needed. To create your `SECRET_JWT` key (RSA256 key), you can run
+the following commands on your terminal (linux only):
+
+```
+ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key
+# Don't add passphrase
+openssl rsa -in jwtRS256.key -pubout -outform PEM -out jwtRS256.key.pub
+cat jwtRS256.key
+```
+
+Copy the output from the `cat` command and paste it on `SECRET_JWT` inside the
+`.env` file.
+
+Then, you need to connect to your database, migrate the schema and generate 
+your Prisma Client. Run the following command:
+
+```
+npx prisma migrate dev --name init
+```
+
 
 ## Running the app
 
-```bash
+```
 # development
-$ npm run start
+npm run start
 
 # watch mode
-$ npm run start:dev
+npm run start:dev
 
 # production mode
-$ npm run start:prod
+npm run start:prod
 ```
 
-## Test
+## Endpoints
 
-```bash
-# unit tests
-$ npm run test
+_to be defined_
 
-# e2e tests
-$ npm run test:e2e
+You can also find a file named `collection-insomnia.json` which contains the same endpoints ready to import on Insomnia.
 
-# test coverage
-$ npm run test:cov
-```
+## You should know
+This project uses [commitlint](https://github.com/conventional-changelog/commitlint) to enforce a conventional format on all commits. So, if you fork or clone this repo, it will install commitlint as dev dependency too and affect how you create commits, even if it's against your own repo. _You can change this behavior on `package-lock.json`._
 
-## Support
+## Let's chat!
+- Twitter: [@joaodath](https://twitter.com/joaodath)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- LinkedIn: [João Rodrigues](https://linkedin.com/in/joaodath)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This API is [MPLv2 licensed](LICENSE).
